@@ -1,4 +1,4 @@
-# Noah Gamza — Portfolio (GitHub Pages, no framework)
+# Noah Gamza Portfolio (Pages of Analytical Projects)
 
 One file: `index.html`. No build step, no Quarto, no Jekyll — write HTML, push, it's live.
 
