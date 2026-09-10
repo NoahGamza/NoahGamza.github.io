@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Temple WBB — Sideline Appeal Calculator</title>
+<style>
+  :root {
+    --cherry: #9D2235;
+    --cherry-dark: #7a1526;
+    --cherry-soft: #c17b8a;
+    --ink: #1a1a1a;
+    --paper: #ffffff;
+    --line-soft: #e8d9dc;
+    --muted: #a66b76;
+    --good: #1a9b52;
+    --mid: #f0ac1f;
+    --bad: #d81f3a;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  button, input, select, textarea {
+    font-family: 'Times New Roman', Times, serif;
+  }
+  body {
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 14px 16px 14px;
+  }
+  .wrap { max-width: 430px; margin: 0 auto; }
+
+  .top-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 0 10px;
+    margin-bottom: 14px;
+  }
+  .top-toggle button {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border: 1.5px solid var(--cherry-soft);
+    border-radius: 5px;
+    background: var(--paper);
+    color: var(--cherry);
+  }
+  .top-toggle button.active {
+    background: var(--cherry);
+    color: #fff;
+  }
+
+  .section-label {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cherry);
+    margin: 14px 0 6px;
+  }
+  .section-label:first-of-type { margin-top: 0; }
+  .section-label-strong {
+    font-weight: 700;
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+
+  .score-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 14px;
+  }
+  .score-col { text-align: center; }
+  .score-col .team-label {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--cherry);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+  }
+  .score-input {
+    font-family: 'Times New Roman', Times, serif;
+    font-variant-numeric: tabular-nums;
+    font-size: 52px;
+    font-weight: 700;
+    width: 104px;
+    text-align: center;
+    border: 1.5px solid var(--cherry-soft);
+    border-radius: 5px;
+    padding: 6px 2px;
+    color: var(--ink);
+    background: var(--paper);
+    -moz-appearance: textfield;
+  }
+  .score-input:focus { outline: none; border-color: var(--cherry-dark); }
+  .score-input::-webkit-outer-spin-button,
+  .score-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .vs-label {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--muted);
+    padding-bottom: 6px;
+  }
+
+  .quarter-clock-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .quarter-select, .clock-input {
+    font-family: 'Times New Roman', Times, serif;
+    width: 100%;
+    padding: 10px 8px;
+    border: 1.5px solid var(--cherry-soft);
+    border-radius: 5px;
+    font-size: 23px;
+    font-weight: 700;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .clock-input { text-align: center; letter-spacing: 0.04em; }
+  .quarter-select:focus, .clock-input:focus { outline: none; border-color: var(--cherry-dark); }
+
+  .call-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .conf-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .pill-btn {
+    font-family: 'Times New Roman', Times, serif;
+    border: 1.5px solid var(--cherry-soft);
+    border-radius: 5px;
+    background: var(--paper);
+    padding: 8px 4px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--cherry);
+    text-align: center;
+    line-height: 1.2;
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .call-btn { min-height: 40px; font-weight: 600; }
+  .pill-btn.active {
+    background: var(--cherry);
+    border-color: var(--cherry);
+    color: #fff;
+  }
+
+  .to-single-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+  .step-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--cherry);
+    background: var(--paper);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cherry);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+  .step-btn:active { background: var(--cherry); border-color: var(--cherry); color: #fff; }
+  .to-single-row .score-input {
+    width: 52px;
+    font-size: 26px;
+    border: 1.5px solid var(--cherry-soft);
+    padding: 4px 2px;
+  }
+
+  .verdict-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .verdict-circle {
+    flex: 0 0 auto;
+    width: 168px;
+    height: 168px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: var(--muted);
+  }
+  .verdict-circle.good { background: var(--good); }
+  .verdict-circle.mid { background: var(--mid); }
+  .verdict-circle.bad { background: var(--bad); }
+  .verdict-title {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: #fff;
+    padding: 0 10px;
+  }
+  .verdict-circle.mid .verdict-title { color: #3a2a00; }
+  .verdict-sub {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 19px;
+    margin-top: 5px;
+    font-weight: 700;
+    color: #fff;
+    opacity: 0.92;
+    letter-spacing: 0.01em;
+  }
+  .verdict-circle.mid .verdict-sub { color: #3a2a00; opacity: 0.85; }
+
+  .breakdown-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding-top: 6px;
+  }
+  .breakdown-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .breakdown-arrow {
+    font-size: 18px;
+    line-height: 1;
+  }
+  .breakdown-col.up .breakdown-arrow { color: var(--good); }
+  .breakdown-col.down .breakdown-arrow { color: var(--bad); }
+  .breakdown-vs {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .breakdown-label {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 9.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+  .breakdown-val {
+    font-family: 'Times New Roman', Times, serif;
+    font-variant-numeric: tabular-nums;
+    font-size: 19px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .breakdown-col.up .breakdown-val { color: var(--good); }
+  .breakdown-col.down .breakdown-val { color: var(--bad); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top-toggle" id="siteToggle">
+    <button class="active" data-val="home">Home Game</button>
+    <button data-val="away">Road Game</button>
+  </div>
+
+  <div class="score-row">
+    <div class="score-col">
+      <div class="team-label">Temple</div>
+      <input type="number" class="score-input" id="templeScoreInput" value="57" min="0" inputmode="numeric">
+    </div>
+    <div class="vs-label">vs</div>
+    <div class="score-col">
+      <div class="team-label">Opponent</div>
+      <input type="number" class="score-input" id="oppScoreInput" value="58" min="0" inputmode="numeric">
+    </div>
+  </div>
+
+  <div class="section-label">Quarter &amp; Clock</div>
+  <div class="quarter-clock-row">
+    <select id="periodSelect" class="quarter-select">
+      <option value="1">Q1</option>
+      <option value="2">Q2</option>
+      <option value="3">Q3</option>
+      <option value="4" selected>Q4</option>
+      <option value="5">OT1</option>
+      <option value="6">OT2</option>
+    </select>
+    <input type="text" id="clockInput" class="clock-input" value="0:40" inputmode="numeric" placeholder="mm:ss">
+  </div>
+
+  <div class="section-label">What Are You Appealing?</div>
+  <div class="call-grid" id="callPresets">
+    <button class="pill-btn call-btn" data-preset="oob">Out of Bounds</button>
+    <button class="pill-btn call-btn active" data-preset="shooting_foul">Shooting Foul</button>
+    <button class="pill-btn call-btn" data-preset="basket_int">Basket Interference</button>
+    <button class="pill-btn call-btn" data-preset="charge_block">Charge / Block</button>
+  </div>
+
+  <div class="section-label section-label-strong">Confidence It Will Be Overturned</div>
+  <div class="conf-row" id="confPresets">
+    <button class="pill-btn" data-p="0.20">Not Confident</button>
+    <button class="pill-btn active" data-p="0.50">Could Go Either Way</button>
+    <button class="pill-btn" data-p="0.80">Confident</button>
+  </div>
+
+  <div class="section-label">Temple Timeouts Left — Right Now</div>
+  <div class="to-single-row">
+    <button class="step-btn" id="templeTOMinus" aria-label="Decrease Temple timeouts left">−</button>
+    <div class="score-input" id="templeTOOut">3</div>
+    <button class="step-btn" id="templeTOPlus" aria-label="Increase Temple timeouts left">+</button>
+  </div>
+
+  <div class="verdict-wrap">
+    <div class="verdict-circle" id="verdictBox">
+      <div class="verdict-title" id="verdictTitle">–</div>
+      <div class="verdict-sub" id="verdictSub">–</div>
+    </div>
+    <div class="breakdown-row">
+      <div class="breakdown-col up">
+        <div class="breakdown-arrow">▲</div>
+        <div class="breakdown-val" id="swingOut">–</div>
+        <div class="breakdown-label">If Overturned</div>
+      </div>
+      <div class="breakdown-vs">vs</div>
+      <div class="breakdown-col down">
+        <div class="breakdown-arrow">▼</div>
+        <div class="breakdown-val" id="costOut">–</div>
+        <div class="breakdown-label">If It Stands</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const GAME_LEN_SEC = 2400;
+const HOME_ADV_PTS = 3.0;
+const SIGMA = 0.30;
+// Measured from real full-season NCAAW play-by-play, not hand-picked.
+const POSS_VALUE = 0.975;
+const TIMEOUT_POSS_BONUS = 0.0787;  // possession right after a timeout: 1.0538 vs 0.9751 baseline
+const CLOCK_PENALTY_1_5 = -0.2668;  // clock at 1-5s left: 0.7082 vs 0.9751 baseline
+const CLOCK_PENALTY_6_10 = -0.0464; // clock at 6-10s left: 0.9287 vs 0.9751 baseline
+
+// NCAAW timeout allotment: 4 total per team per game, but at most 3 may be
+// carried into the second half -- an unused 4th is forfeited at halftime,
+// not banked. Caps the stepper below so it can't be set to something that
+// isn't actually possible for whatever quarter is selected.
+const MAX_TIMEOUTS_FIRST_HALF = 4;
+const MAX_TIMEOUTS_SECOND_HALF = 3; // Q3, Q4, and any OT
+function maxTimeoutsForPeriod(period) {
+  return period <= 2 ? MAX_TIMEOUTS_FIRST_HALF : MAX_TIMEOUTS_SECOND_HALF;
+}
+
+// NEW for 2025-26: in the last 59.9 seconds of regulation/OT, a team that
+// just gained the ball in its own backcourt can use a timeout to advance
+// the ball to the 28-ft line instead of inbounding from the backcourt --
+// a much bigger deal than the flat per-possession bonus above. No
+// historical data exists yet for this brand-new rule, so this multiplier
+// is a flagged JUDGMENT CALL, not a measured number.
+const ENDGAME_WINDOW_SECS = 59.9;
+const ENDGAME_TIMEOUT_MULTIPLIER = 4;
+
+// The 4x multiplier above represents a timeout's value for the specific
+// "advance the ball" mechanic -- which only matters for whichever team is
+// about to POSSESS the ball next. A held timeout for the team that's about
+// to play DEFENSE (opponent inbounding) can't be spent on that mechanic at
+// all; its only residual value there is smaller stuff -- icing free
+// throws, having something in your pocket for a scramble/jump ball, a
+// quick foul-and-restart if trailing. Discounted hard, not zeroed.
+const DEFENSE_TIMEOUT_DISCOUNT = 0.15;
+
+// Real, measurable cost of a technical foul for an excessive timeout (i.e.
+// Temple appeals and loses while already at 0 timeouts): 2 free throws for
+// the opponent. Reusing the same ~1.4-pt assumption already used for the
+// "shooting foul" and "charge/block" presets above, for consistency within
+// this file. This does NOT include the extra possession the opponent
+// typically gets after a technical, which is a real additional cost this
+// tool still doesn't price in.
+const TECH_FOUL_FT_PTS = 1.4;
+
+function clockToSeconds(str) {
+  const parts = String(str).split(":");
+  if (parts.length !== 2) return 0;
+  const m = parseFloat(parts[0]) || 0;
+  const s = parseFloat(parts[1]) || 0;
+  return m * 60 + s;
+}
+
+// period: 1-4 for regulation, 5/6/... for OT1/OT2/... Converts a
+// quarter + clock into total seconds remaining in the GAME, the same way
+// wbb_secs_remaining() does in the R model.
+function secsRemaining(period, clockStr) {
+  const secsLeftInPeriod = clockToSeconds(clockStr);
+  if (period <= 4) {
+    const periodsLeftAfter = 4 - period;
+    return secsLeftInPeriod + periodsLeftAfter * (GAME_LEN_SEC / 4);
+  }
+  // OT: assume this is the final period (unknown future OTs)
+  return secsLeftInPeriod;
+}
+
+// Diminishing marginal value of banked timeouts: your very last one
+// (the difference between having 1 and having 0) is worth a full unit;
+// each additional one beyond that adds progressively less (harmonic
+// weights: 1, 1/2, 1/3, ...). Concretely, going from 1 timeout to 0 costs
+// unitValue; going from 3 to 2 only costs unitValue/3.
+//
+// excessDiscount scales ONLY the k=4 slice (the one beyond
+// MAX_TIMEOUTS_SECOND_HALF) -- see excessTimeoutDiscount below. n can only
+// reach 4 in the first half anyway (the UI caps it at 3 from Q3 on), so
+// this is a no-op everywhere else.
+function timeoutReserveValue(n, unitValue, excessDiscount) {
+  if (!n || n <= 0) return 0;
+  if (excessDiscount === undefined) excessDiscount = 1;
+  let total = 0;
+  for (let k = 1; k <= n; k++) {
+    const weight = unitValue / k;
+    total += (k > MAX_TIMEOUTS_SECOND_HALF) ? weight * excessDiscount : weight;
+  }
+  return total;
+}
+
+// homeTimeoutsLeft / awayTimeoutsLeft are each optional and INDEPENDENT --
+// your own timeouts add value to you whether or not the opponent's count
+// is even supplied. This tool only ever passes Temple's own count (see
+// toHomeAway below), so the opponent side of this always contributes 0,
+// on purpose: the value of Temple's timeout shouldn't depend on how many
+// the opponent has.
+//
+// secsRem is total GAME seconds remaining (drives the score-margin decay
+// and the endgame-window check); periodSecsRemaining is seconds left in
+// THIS quarter specifically (drives the clock-pressure penalty).
+function winProbHome(homeScore, awayScore, secsRem, periodSecsRemaining, homeCourt, possession,
+                      homeTimeoutsLeft, awayTimeoutsLeft) {
+  const t = Math.max(secsRem, 0.5);
+  const margin = homeScore - awayScore;
+  const priorEdge = homeCourt ? HOME_ADV_PTS : -HOME_ADV_PTS;
+  const edge = priorEdge * (t / GAME_LEN_SEC);
+
+  let clockPenalty = 0;
+  if (periodSecsRemaining <= 5) clockPenalty = CLOCK_PENALTY_1_5;
+  else if (periodSecsRemaining <= 10) clockPenalty = CLOCK_PENALTY_6_10;
+
+  // Endgame rule is specifically about the 4th quarter/OT -- checking the
+  // GAME-total clock here (not the period clock) is what naturally keeps
+  // this from ever triggering in Q1-3, since a full quarter or more is
+  // always still left on the game clock at that point.
+  //
+  // Split by side, not one shared value: the side about to POSSESS the
+  // ball (per the `possession` param) gets the full advance-the-ball
+  // multiplier; the side about to play defense gets it heavily discounted
+  // (DEFENSE_TIMEOUT_DISCOUNT), since they can't spend a timeout on that
+  // mechanic right now. Outside the endgame window, both sides get the
+  // plain baseline (1x) regardless of possession -- there's no defined
+  // "next possession" to discount against yet.
+  const inEndgameWindow = secsRem <= ENDGAME_WINDOW_SECS;
+  const homeEndgameMult = !inEndgameWindow ? 1
+    : (possession === "home" ? ENDGAME_TIMEOUT_MULTIPLIER : ENDGAME_TIMEOUT_MULTIPLIER * DEFENSE_TIMEOUT_DISCOUNT);
+  const awayEndgameMult = !inEndgameWindow ? 1
+    : (possession === "away" ? ENDGAME_TIMEOUT_MULTIPLIER : ENDGAME_TIMEOUT_MULTIPLIER * DEFENSE_TIMEOUT_DISCOUNT);
+
+  const possValue = POSS_VALUE + clockPenalty;
+
+  let possAdj = 0;
+  if (possession === "home") possAdj = possValue;
+  else if (possession === "away") possAdj = -possValue;
+
+  // "Nothing to lose" for the 4th timeout specifically: it's forfeited at
+  // halftime if unused, so holding a 4th one only has real forward-looking
+  // value if there's still first-half time left to actually use it in.
+  // This fades that 4th-timeout slice from full value (start of the game)
+  // down to zero (right at halftime), while timeouts 1-3 (which always
+  // carry forward) are never discounted.
+  const HALF_LEN_SEC = GAME_LEN_SEC / 2;
+  const excessTimeoutDiscount = secsRem >= HALF_LEN_SEC
+    ? Math.min(1, Math.max(0, (secsRem - HALF_LEN_SEC) / HALF_LEN_SEC))
+    : 1; // already the second half/OT: n can't exceed 3 here anyway, so this never applies
+
+  // Standalone reserve-timeout effect -- independent of who currently has
+  // the ball. Each side computed on its own (not as a home-minus-away
+  // differential) so either can be left unsupplied without zeroing out
+  // the other's contribution. Uses diminishing marginal value, not a flat
+  // per-timeout rate. Stays INSIDE the /SIGMA*sqrt(t) scaling on purpose --
+  // it's standing in for a measured per-possession point value, so like
+  // any point-based effect, it should matter less the more game is left.
+  const homeReservePts = (homeTimeoutsLeft !== null && homeTimeoutsLeft !== undefined && !isNaN(homeTimeoutsLeft))
+    ? timeoutReserveValue(homeTimeoutsLeft, TIMEOUT_POSS_BONUS * homeEndgameMult, excessTimeoutDiscount) : 0;
+  const awayReservePts = (awayTimeoutsLeft !== null && awayTimeoutsLeft !== undefined && !isNaN(awayTimeoutsLeft))
+    ? timeoutReserveValue(awayTimeoutsLeft, TIMEOUT_POSS_BONUS * awayEndgameMult, excessTimeoutDiscount) : 0;
+  const timeoutReservePts = homeReservePts - awayReservePts;
+
+  // Flagged JUDGMENT CALL, not measured: being down a timeout constrains a
+  // coach's options for the REST of the game, not just the value of the
+  // next possession. That's a persistent strategic cost, not a one-time
+  // point swing, so unlike timeoutReservePts above, this is added directly
+  // to the log-odds z-score OUTSIDE the /SIGMA*sqrt(t) scaling -- it does
+  // NOT fade just because a lot of game time is left.
+  const TIMEOUT_INSURANCE_LOGIT = 0.08; // judgment call: full value of your LAST timeout, in log-odds
+  const homeInsuranceLogit = (homeTimeoutsLeft !== null && homeTimeoutsLeft !== undefined && !isNaN(homeTimeoutsLeft))
+    ? timeoutReserveValue(homeTimeoutsLeft, TIMEOUT_INSURANCE_LOGIT, excessTimeoutDiscount) : 0;
+  const awayInsuranceLogit = (awayTimeoutsLeft !== null && awayTimeoutsLeft !== undefined && !isNaN(awayTimeoutsLeft))
+    ? timeoutReserveValue(awayTimeoutsLeft, TIMEOUT_INSURANCE_LOGIT, excessTimeoutDiscount) : 0;
+  const timeoutInsuranceLogit = homeInsuranceLogit - awayInsuranceLogit;
+
+  const z = (margin + edge + possAdj + timeoutReservePts) / (SIGMA * Math.sqrt(t)) + timeoutInsuranceLogit;
+  return 1 / (1 + Math.exp(-z));
+}
+
+// Each preset is written in temple/opponent terms, independent of home/away.
+// possStands / possOver are "temple", "opponent", or null (no adjustment).
+const PRESETS = {
+  oob: {
+    templeDeltaStands: 0, oppDeltaStands: 0, possStands: "opponent",
+    templeDeltaOver: 0,    oppDeltaOver: 0,    possOver: "temple"
+  },
+  shooting_foul: {
+    templeDeltaStands: 0, oppDeltaStands: 1.4, possStands: null,
+    templeDeltaOver: 0,    oppDeltaOver: 0,     possOver: null
+  },
+  basket_int: {
+    templeDeltaStands: 0, oppDeltaStands: 0,    possStands: null,
+    templeDeltaOver: 0,    oppDeltaOver: -2,    possOver: null
+  },
+  charge_block: {
+    templeDeltaStands: 0, oppDeltaStands: 1.4, possStands: null,
+    templeDeltaOver: 0,    oppDeltaOver: 0,     possOver: "temple"
+  }
+};
+
+let state = {
+  isHome: true,
+  templeScore: 57,
+  oppScore: 58,
+  period: 4,
+  clockStr: "0:40",
+  callType: "shooting_foul",
+  pOverturn: 0.50,
+  templeTimeoutsLeft: 3
+};
+
+function setupGroup(containerId, dataAttr, onSelect) {
+  const container = document.getElementById(containerId);
+  container.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      container.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      onSelect(btn.dataset[dataAttr]);
+      update();
+    });
+  });
+}
+
+setupGroup("siteToggle", "val", (val) => { state.isHome = (val === "home"); });
+setupGroup("callPresets", "preset", (val) => { state.callType = val; });
+setupGroup("confPresets", "p", (val) => { state.pOverturn = parseFloat(val); });
+
+document.getElementById("periodSelect").addEventListener("change", (e) => {
+  state.period = parseInt(e.target.value, 10);
+  // Crossing into the second half forfeits any 4th timeout, by rule --
+  // clamp down rather than let the count silently become impossible.
+  const max = maxTimeoutsForPeriod(state.period);
+  if (state.templeTimeoutsLeft > max) state.templeTimeoutsLeft = max;
+  update();
+});
+document.getElementById("clockInput").addEventListener("input", (e) => {
+  state.clockStr = e.target.value;
+  update();
+});
+
+document.getElementById("templeScoreInput").addEventListener("input", (e) => {
+  state.templeScore = Math.max(0, parseInt(e.target.value, 10) || 0);
+  update();
+});
+document.getElementById("oppScoreInput").addEventListener("input", (e) => {
+  state.oppScore = Math.max(0, parseInt(e.target.value, 10) || 0);
+  update();
+});
+
+document.getElementById("templeTOPlus").addEventListener("click", () => {
+  const max = maxTimeoutsForPeriod(state.period);
+  state.templeTimeoutsLeft = Math.min(max, state.templeTimeoutsLeft + 1);
+  update();
+});
+document.getElementById("templeTOMinus").addEventListener("click", () => { state.templeTimeoutsLeft = Math.max(0, state.templeTimeoutsLeft - 1); update(); });
+
+function update() {
+  document.getElementById("templeTOOut").textContent = state.templeTimeoutsLeft;
+
+  const preset = PRESETS[state.callType];
+
+  // "Now" is Temple's actual current timeout count, before the appeal's
+  // outcome is known -- this is also the never-appealed baseline, since
+  // not appealing at all leaves this count untouched.
+  const templeTONow = state.templeTimeoutsLeft;
+  // If Temple already has 0 timeouts, a denied appeal can't cost them a
+  // timeout they don't have -- by rule it's ruled a technical foul for an
+  // excessive timeout instead. Priced directly onto the scoreboard below.
+  const willTriggerTechFoul = (templeTONow === 0);
+  const templeTOStands = willTriggerTechFoul ? templeTONow : templeTONow - 1;
+  const templeTOOver = templeTONow;   // appeal succeeds -> no cost
+
+  const templeStands = state.templeScore + preset.templeDeltaStands;
+  let oppStands = state.oppScore + preset.oppDeltaStands;
+  if (willTriggerTechFoul) oppStands += TECH_FOUL_FT_PTS;
+  const templeOver = state.templeScore + preset.templeDeltaOver;
+  const oppOver = state.oppScore + preset.oppDeltaOver;
+
+  // convert temple/opponent framing into home/away for the model
+  function toHomeAway(templeVal, oppVal, poss, templeTO) {
+    const homeScore = state.isHome ? templeVal : oppVal;
+    const awayScore = state.isHome ? oppVal : templeVal;
+    let possHA = null;
+    if (poss === "temple") possHA = state.isHome ? "home" : "away";
+    else if (poss === "opponent") possHA = state.isHome ? "away" : "home";
+    const homeTO = state.isHome ? templeTO : undefined;
+    const awayTO = state.isHome ? undefined : templeTO;
+    return { homeScore, awayScore, possHA, homeTO, awayTO };
+  }
+
+  const s1 = toHomeAway(templeStands, oppStands, preset.possStands, templeTOStands);
+  const s2 = toHomeAway(templeOver, oppOver, preset.possOver, templeTOOver);
+  // baseline: same score/possession as the "stands" branch WITHOUT the
+  // technical-foul points, with Temple's timeout count as it is RIGHT NOW.
+  const oppBaseline = state.oppScore + preset.oppDeltaStands;
+  const s0 = toHomeAway(templeStands, oppBaseline, preset.possStands, templeTONow);
+
+  const periodSecsRemaining = clockToSeconds(state.clockStr);
+  const totalSecsRemaining = secsRemaining(state.period, state.clockStr);
+
+  const wpHomeStands = winProbHome(s1.homeScore, s1.awayScore, totalSecsRemaining, periodSecsRemaining,
+                                    state.isHome, s1.possHA, s1.homeTO, s1.awayTO);
+  const wpHomeOver = winProbHome(s2.homeScore, s2.awayScore, totalSecsRemaining, periodSecsRemaining,
+                                  state.isHome, s2.possHA, s2.homeTO, s2.awayTO);
+  const wpHomeBaseline = winProbHome(s0.homeScore, s0.awayScore, totalSecsRemaining, periodSecsRemaining,
+                                      state.isHome, s0.possHA, s0.homeTO, s0.awayTO);
+
+  const wpTempleStands = state.isHome ? wpHomeStands : 1 - wpHomeStands;
+  const wpTempleOver = state.isHome ? wpHomeOver : 1 - wpHomeOver;
+  const wpTempleBaseline = state.isHome ? wpHomeBaseline : 1 - wpHomeBaseline;
+
+  // The real question is "appeal vs. never appealing at all," not "win vs.
+  // lose" compared to each other.
+  const swingIfCorrect = wpTempleOver - wpTempleBaseline;
+  const costIfWrong = wpTempleStands - wpTempleBaseline;
+  const ev = state.pOverturn * swingIfCorrect + (1 - state.pOverturn) * costIfWrong;
+
+  // "Nothing to lose": the fixed bar is too conservative when Temple is
+  // already unlikely to win anyway -- scales down as wpTempleBaseline
+  // drops below 50%, untouched at or above it.
+  const desperationFactor = wpTempleBaseline < 0.5 ? Math.max(wpTempleBaseline / 0.5, 0.1) : 1;
+
+  // Zero-timeout risk premium: a technical foul at 0 timeouts also means
+  // Temple has ZERO recourse for the rest of the game -- an unpriced,
+  // compounding risk. Instead of guessing at an extra point cost, this
+  // raises the bar for "worth it" instead.
+  const ZERO_TIMEOUT_RISK_PREMIUM = 3;
+  const riskPremium = willTriggerTechFoul ? ZERO_TIMEOUT_RISK_PREMIUM : 1;
+
+  // Free roll: when the cost of a failed appeal is close to zero -- e.g.
+  // the timeout being spent was going to be forfeited anyway at halftime,
+  // so losing it costs nothing real -- a coach should take a much smaller
+  // edge than usual, since there's barely anything to lose. Scales the bar
+  // down as |costIfWrong| shrinks toward 0%, back to normal (1x) once the
+  // real cost reaches a full percentage point.
+  const FREE_ROLL_COST_CUTOFF = 0.01;
+  const FREE_ROLL_FLOOR = 0.25;
+  const costMagnitude = Math.abs(costIfWrong);
+  const freeRollFactor = costMagnitude >= FREE_ROLL_COST_CUTOFF
+    ? 1
+    : FREE_ROLL_FLOOR + (1 - FREE_ROLL_FLOOR) * (costMagnitude / FREE_ROLL_COST_CUTOFF);
+
+  // Endgame risk premium: in the closing seconds of the GAME (not just a
+  // quarter), a possession swap matters far more than the raw win-
+  // probability-point difference shows -- those numbers compress toward
+  // 0%/100% even when the real stakes are enormous (e.g. up 1 with the
+  // ball to run out the clock vs. handing the opponent a look at a
+  // tying/winning shot). Raises the bar in the same final window the
+  // timeout-value bonus already uses, independent of the free-roll discount
+  // above -- a play can be both "nothing to lose on the timeout" and "the
+  // stakes of this exact possession are still enormous" at the same time.
+  const ENDGAME_RISK_PREMIUM = 2;
+  const endgameRiskPremium = totalSecsRemaining <= ENDGAME_WINDOW_SECS ? ENDGAME_RISK_PREMIUM : 1;
+
+  // Last-timeout caution: with exactly ONE timeout left in the closing
+  // seconds, a failed appeal doesn't just cost a timeout -- it's your LAST
+  // one, one appeal away from the zero-timeout technical-foul risk above.
+  // Leans hard on confidence specifically here: at low confidence the bar
+  // jumps up sharply (don't burn your last timeout on a coin flip), easing
+  // back toward normal as confidence climbs toward certainty. Doesn't touch
+  // the 2+ or 0 timeout cases -- those are handled by excessTimeoutDiscount
+  // and ZERO_TIMEOUT_RISK_PREMIUM respectively.
+  const LAST_TIMEOUT_MAX_RISK_PREMIUM = 2;
+  const inEndgameWindow = totalSecsRemaining <= ENDGAME_WINDOW_SECS;
+  const lastTimeoutRiskPremium = (templeTONow === 1 && inEndgameWindow)
+    ? 1 + (LAST_TIMEOUT_MAX_RISK_PREMIUM - 1) * (1 - state.pOverturn)
+    : 1;
+
+  const worthThreshold = 0.025 * desperationFactor * riskPremium * freeRollFactor * endgameRiskPremium * lastTimeoutRiskPremium;
+  const tossUpThreshold = 0.015 * desperationFactor * riskPremium * freeRollFactor * endgameRiskPremium * lastTimeoutRiskPremium;
+
+  const box = document.getElementById("verdictBox");
+  const title = document.getElementById("verdictTitle");
+  const sub = document.getElementById("verdictSub");
+
+  box.classList.remove("good", "mid", "bad");
+  const evPct = (ev * 100).toFixed(1);
+  const evStr = (ev >= 0 ? "+" : "") + evPct + "%";
+
+  document.getElementById("swingOut").textContent = (swingIfCorrect >= 0 ? "+" : "") +
+    (swingIfCorrect * 100).toFixed(1) + "%";
+  document.getElementById("costOut").textContent = (costIfWrong >= 0 ? "+" : "") +
+    (costIfWrong * 100).toFixed(1) + "%";
+
+  if (ev >= worthThreshold) {
+    box.classList.add("good");
+    title.textContent = "Appeal It";
+  } else if (ev >= tossUpThreshold) {
+    box.classList.add("mid");
+    title.textContent = "Coach's Call";
+  } else {
+    box.classList.add("bad");
+    title.textContent = "Don't Appeal";
+  }
+  sub.textContent = evStr;
+}
+
+update();
+</script>
+</body>
+</html>
