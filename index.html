@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noah Gamza — Sports Analytics</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #666666;
+    --rule: #dddddd;
+    --link: #0645ad;
+    --link-visited: #0b0080;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12141a;
+      --fg: #e8e8e8;
+      --muted: #9a9a9a;
+      --rule: #2c2f38;
+      --link: #7aa2f7;
+      --link-visited: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem 1.25rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+    margin: 0 0 0.2rem 0;
+  }
+  .tagline {
+    color: var(--muted);
+    margin: 0 0 1rem 0;
+    font-size: 0.95rem;
+  }
+  .contact {
+    font-size: 0.9rem;
+    margin: 0 0 2rem 0;
+  }
+  .contact a { margin-right: 0.9rem; white-space: nowrap; }
+  .contact a:last-child { margin-right: 0; }
+  h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.4rem;
+    margin: 2.2rem 0 0.9rem 0;
+  }
+  ul.tools {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.tools li {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  ul.tools li:last-child { border-bottom: none; }
+  ul.tools a {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  ul.tools .desc {
+    display: block;
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-top: 0.15rem;
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:visited { color: var(--link-visited); }
+  a:hover { text-decoration: underline; }
+  .note {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+  }
+  footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <h1>Noah Gamza</h1>
+  <p class="tagline">Sports analytics — baseball &amp; basketball. M.S. Sport Business (Analytics), Temple University.</p>
+  <p class="contact">
+    <!-- TODO: swap in real links -->
+    <a href="mailto:noahsgamza@gmail.com">Email</a><a href="https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE">LinkedIn</a><a href="https://github.com/YOUR-GITHUB-HANDLE">GitHub</a><a href="https://YOUR-SUBSTACK.substack.com">Substack</a><a href="assets/resume.pdf">Resume</a>
+  </p>
+
+  <h2>Baseball</h2>
+  <ul class="tools">
+
+    <li>
+      <!-- TODO: point at your deployed Hamptons League Scout app -->
+      <a href="https://YOUR-SHINYAPPS-URL.shinyapps.io/hamptons_league_scout" target="_blank" rel="noopener">Hamptons League Scout</a>
+      <span class="desc">Pitch tracking &amp; analytics for the HCBL — FlightScope X3B radar data, real-time classification, umpire-validated zone modeling.</span>
+    </li>
+
+    <li>
+      <a href="https://noahgamzashiny.shinyapps.io/mlb_sequencing_app" target="_blank" rel="noopener">SEQAR — Pitch Sequencing</a>
+      <span class="desc">MLB pitch-sequencing metric built on 2025 Statcast data (729K+ pitches). Live Shiny app.</span>
+    </li>
+
+    <li>
+      <!-- TODO: link a write-up, notebook, or app for BDR -->
+      <a href="#" target="_blank" rel="noopener">Bad Decision Rate (BDR)</a>
+      <span class="desc">XGBoost swing decision model — scores swing/take decisions against pitch quality and location.</span>
+    </li>
+
+    <li>
+      <!-- TODO: link a landing page for the consulting service, if you have one -->
+      <a href="#" target="_blank" rel="noopener">Recruiting Consulting</a>
+      <span class="desc">Recruiting consulting service for high school and JUCO players.</span>
+    </li>
+
+  </ul>
+
+  <h2>Basketball</h2>
+  <ul class="tools">
+
+    <li>
+      <a href="#">Video Coordination — Temple Women's Basketball</a>
+      <!-- TODO: replace with real specifics about the role -->
+      <span class="desc">Game and practice film breakdown, opponent scouting via Hudl/Sportscode.</span>
+    </li>
+
+  </ul>
+  <p class="note"><!-- TODO: delete this note once the section has more in it --> Lighter than baseball right now — add entries here the same way as more work ships.</p>
+
+  <h2>Writing</h2>
+  <ul class="tools">
+
+    <li>
+      <!-- TODO: replace with real posts, duplicate this block per post -->
+      <a href="https://YOUR-SUBSTACK.substack.com/p/your-post-slug" target="_blank" rel="noopener">Post Title Goes Here</a>
+      <span class="desc">One-sentence hook describing what the post covers.</span>
+    </li>
+
+  </ul>
+
+  <footer>
+    Built by hand — HTML on GitHub Pages, no framework.
+  </footer>
+
+</main>
+</body>
+</html>
