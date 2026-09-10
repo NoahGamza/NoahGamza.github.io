@@ -44,7 +44,6 @@
   }
   h1, h2, h3 { font-family: "Space Grotesk", "Inter", sans-serif; letter-spacing: -0.01em; }
   .wrap { max-width: 880px; margin: 0 auto; padding: 0 1.4rem; }
-
   /* Hero */
   .hero { padding: 4.2rem 0 2.4rem 0; }
   .hero .kicker {
@@ -82,7 +81,6 @@
     border-color: var(--accent);
   }
   .btn.primary:hover { filter: brightness(1.05); }
-
   /* Quick nav */
   .quicknav {
     display: flex;
@@ -100,7 +98,6 @@
     letter-spacing: 0.02em;
   }
   .quicknav a:hover { color: var(--accent); }
-
   /* Sections */
   section { padding: 2.6rem 0 0.6rem 0; }
   section h2 {
@@ -119,7 +116,6 @@
     color: var(--muted);
     margin: 0.6rem 0 0 0;
   }
-
   /* Card grid */
   .grid {
     display: grid;
@@ -191,7 +187,6 @@
     margin-top: auto;
   }
   .card .go:hover { text-decoration: underline; }
-
   footer {
     margin-top: 3.2rem;
     padding: 1.6rem 0 3rem 0;
@@ -203,7 +198,6 @@
 </head>
 <body>
 <div class="wrap">
-
   <header class="hero">
     <p class="kicker">Sports Analytics</p>
     <h1>Noah Gamza</h1>
@@ -217,24 +211,20 @@
       <a class="btn" href="assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
     </div>
   </header>
-
   <nav class="quicknav">
     <a href="#baseball">Baseball</a>
     <a href="#basketball">Basketball</a>
     <a href="#writing">Writing</a>
   </nav>
-
   <section id="baseball">
     <h2>Baseball</h2>
     <div class="grid">
-
       <div class="card">
         <div class="top-row"><h3><a href="https://YOUR-SHINYAPPS-URL.shinyapps.io/hamptons_league_scout" target="_blank" rel="noopener">Hamptons League Scout</a></h3></div>
         <div class="tags"><span class="tag">R</span><span class="tag">Shiny</span><span class="tag">FlightScope</span></div>
         <p class="desc">Pitch tracking &amp; analytics for the HCBL — FlightScope X3B radar data, real-time classification, umpire-validated zone modeling.</p>
         <a class="go" href="https://YOUR-SHINYAPPS-URL.shinyapps.io/hamptons_league_scout" target="_blank" rel="noopener">Open app →</a>
       </div>
-
       <div class="card">
         <div class="top-row">
           <h3><a href="https://noahgamzashiny.shinyapps.io/mlb_sequencing_app" target="_blank" rel="noopener">SEQAR — Pitch Sequencing</a></h3>
@@ -244,57 +234,54 @@
         <p class="desc">MLB pitch-sequencing metric built on 2025 Statcast data (729K+ pitches).</p>
         <a class="go" href="https://noahgamzashiny.shinyapps.io/mlb_sequencing_app" target="_blank" rel="noopener">Open app →</a>
       </div>
-
       <div class="card">
         <div class="top-row"><h3><a href="#" target="_blank" rel="noopener">Bad Decision Rate (BDR)</a></h3></div>
         <div class="tags"><span class="tag">XGBoost</span><span class="tag">R</span></div>
         <p class="desc">Swing decision model scoring swing/take decisions against pitch quality and location.</p>
         <a class="go" href="#" target="_blank" rel="noopener">Read write-up →</a>
       </div>
-
       <div class="card">
         <div class="top-row"><h3><a href="#" target="_blank" rel="noopener">Recruiting Consulting</a></h3></div>
         <div class="tags"><span class="tag">Consulting</span></div>
         <p class="desc">Recruiting consulting service for high school and JUCO players.</p>
         <a class="go" href="#" target="_blank" rel="noopener">Learn more →</a>
       </div>
-
     </div>
   </section>
-
   <section id="basketball">
     <h2>Basketball</h2>
     <div class="grid">
-
+      <div class="card">
+        <div class="top-row">
+          <h3><a href="wbb_sideline_challenge_calculator.html" target="_blank" rel="noopener">Sideline Challenge Calculator</a></h3>
+          <span class="live-badge">Live</span>
+        </div>
+        <div class="tags"><span class="tag">JavaScript</span><span class="tag">Win Probability</span></div>
+        <p class="desc">In-game tool for Temple WBB staff: is a call worth appealing? Weighs score margin, clock, home court, and timeouts left — including the new endgame advance-the-ball rule.</p>
+        <a class="go" href="wbb_sideline_challenge_calculator.html" target="_blank" rel="noopener">Open tool →</a>
+      </div>
       <div class="card">
         <div class="top-row"><h3><a href="#">Video Coordination — Temple Women's Basketball</a></h3></div>
         <div class="tags"><span class="tag">Hudl</span><span class="tag">Sportscode</span></div>
         <!-- TODO: replace with real specifics about the role -->
         <p class="desc">Game and practice film breakdown, opponent scouting via Hudl/Sportscode.</p>
       </div>
-
     </div>
-    <p class="note"><!-- TODO: delete once this section has more in it -->Lighter than baseball right now — new cards go in the same way as more work ships.</p>
   </section>
-
   <section id="writing">
     <h2>Writing</h2>
     <div class="grid">
-
       <div class="card">
         <!-- TODO: duplicate this card per real post -->
         <div class="top-row"><h3><a href="https://YOUR-SUBSTACK.substack.com/p/your-post-slug" target="_blank" rel="noopener">Post Title Goes Here</a></h3></div>
         <p class="desc">One-sentence hook describing what the post covers.</p>
         <a class="go" href="https://YOUR-SUBSTACK.substack.com/p/your-post-slug" target="_blank" rel="noopener">Read →</a>
       </div>
-
     </div>
   </section>
-
   <footer>
     Built by hand — HTML on GitHub Pages, no framework.
   </footer>
-
 </div>
 </body>
 </html>
