@@ -176,6 +176,17 @@
     margin-top: auto;
   }
   .card .go:hover { text-decoration: underline; }
+  a.card { text-decoration: none; color: inherit; }
+  .card:hover h3 { color: var(--accent); }
+  .card img.visual-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 0.9rem;
+    display: block;
+    background: var(--bg);
+  }
   footer {
     margin-top: 3.2rem;
     padding: 1.6rem 0 3rem 0;
@@ -252,12 +263,49 @@
   <section id="visuals">
     <h2>Visuals</h2>
     <div class="grid">
-      <div class="card">
-        <!-- TODO: duplicate this card for each visual you add -->
-        <div class="top-row"><h3><a href="#" target="_blank" rel="noopener">Visual Title Goes Here</a></h3></div>
-        <p class="desc">One-sentence description of what this shows.</p>
-        <a class="go" href="#" target="_blank" rel="noopener">View →</a>
-      </div>
+      <!-- TODO: to add another visual, duplicate one of these <a class="card">
+           blocks, upload the new image into the visuals/ folder, and swap BOTH
+           "visuals/..." paths (img src and href) plus the title/description. -->
+      <a class="card" href="visuals/dominique-ennis-shot-frequency.png" target="_blank" rel="noopener">
+        <img class="visual-thumb" src="visuals/dominique-ennis-shot-frequency.png" alt="Dominique Ennis shot frequency heatmap">
+        <h3>Dominique Ennis — Shot Frequency</h3>
+        <p class="desc">Shot frequency heatmap (excl. rim) for a Temple WBB guard.</p>
+      </a>
+      <a class="card" href="visuals/lineup-shot-frequency.png" target="_blank" rel="noopener">
+        <img class="visual-thumb" src="visuals/lineup-shot-frequency.png" alt="Starting lineup shot frequency heatmap">
+        <h3>Starting Lineup — Shot Frequency</h3>
+        <p class="desc">Combined shot frequency heatmap for a five-player lineup.</p>
+      </a>
+      <a class="card" href="visuals/rice-team-shot-frequency.png" target="_blank" rel="noopener">
+        <img class="visual-thumb" src="visuals/rice-team-shot-frequency.png" alt="Rice team shot frequency heatmap">
+        <h3>Rice — Team Shot Frequency</h3>
+        <p class="desc">Opponent scouting: team-wide shot frequency heatmap (excl. rim).</p>
+      </a>
+      <a class="card" href="visuals/rice-after-baseline-oob.png" target="_blank" rel="noopener">
+        <img class="visual-thumb" src="visuals/rice-after-baseline-oob.png" alt="Rice shot chart after baseline out-of-bounds plays">
+        <h3>Rice — After Baseline OOB</h3>
+        <p class="desc">Shooting off baseline out-of-bounds plays: 23/52 FG (44.2%).</p>
+      </a>
+      <a class="card" href="visuals/umpire-vs-flightscope.jpg" target="_blank" rel="noopener">
+        <img class="visual-thumb" src="visuals/umpire-vs-flightscope.jpg" alt="Umpire calls vs FlightScope zone locations scatter plot">
+        <h3>Umpire Calls vs. FlightScope</h3>
+        <p class="desc">Comparing umpire ball/strike calls to FlightScope-tracked zone locations.</p>
+      </a>
+      <a class="card" href="visuals/umpire-chart-bucks-vs-breakers.jpg" target="_blank" rel="noopener">
+        <img class="visual-thumb" src="visuals/umpire-chart-bucks-vs-breakers.jpg" alt="Umpire chart for Bucks vs Breakers game">
+        <h3>Umpire Chart — Bucks vs. Breakers</h3>
+        <p class="desc">Called-pitch chart from the HCBL matchup on 7/26, catcher's view.</p>
+      </a>
+      <a class="card" href="visuals/drew-stevens-long-range-fg.png" target="_blank" rel="noopener">
+        <img class="visual-thumb" src="visuals/drew-stevens-long-range-fg.png" alt="Long range field goal percentage comparison chart">
+        <h3>Drew Stevens — Long-Range FG%</h3>
+        <p class="desc">Benchmarking 50+ yard field goal percentage against the field.</p>
+      </a>
+      <a class="card" href="visuals/drew-stevens-draft-zscore-density.png" target="_blank" rel="noopener">
+        <img class="visual-thumb" src="visuals/drew-stevens-draft-zscore-density.png" alt="Density plot of drafted vs undrafted kickers by z-score">
+        <h3>Drew Stevens — Draft Z-Score Density</h3>
+        <p class="desc">Where a kicker's college-production z-score lands relative to drafted vs. undrafted outcomes.</p>
+      </a>
     </div>
   </section>
   <footer>
