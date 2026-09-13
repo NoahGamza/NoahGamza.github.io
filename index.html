@@ -176,6 +176,14 @@
     margin-top: auto;
   }
   .card .go:hover { text-decoration: underline; }
+  .subheading {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    color: var(--muted);
+    margin: 1.8rem 0 1rem 0;
+  }
   a.card { text-decoration: none; color: inherit; }
   .card:hover h3 { color: var(--accent); }
   .card img.visual-thumb {
@@ -253,19 +261,9 @@
         <p class="desc">In-game tool for WBB staff to gauge whether or not a call is worth appealing? Modeled in game win probability, gauges WP swings, clock, home court, and timeouts left, including the new endgame advance-the-ball rule.</p>
         <a class="go" href="wbb_sideline_challenge_calculator.html" target="_blank" rel="noopener">Open tool →</a>
       </div>
-      <div class="card">
-        <div class="top-row"><h3><a href="#">Video Coordination — Temple Women's Basketball</a></h3></div>
-        <!-- TODO: replace with real specifics about the role -->
-        <p class="desc">Game and practice film breakdown, opponent scouting via Hudl/Sportscode.</p>
-      </div>
     </div>
-  </section>
-  <section id="visuals">
-    <h2>Visuals</h2>
+    <h3 class="subheading">Visuals — Temple Women's Basketball Scout</h3>
     <div class="grid">
-      <!-- TODO: to add another visual, duplicate one of these <a class="card">
-           blocks, upload the new image into the visuals/ folder, and swap BOTH
-           "visuals/..." paths (img src and href) plus the title/description. -->
       <a class="card" href="visuals/dominique-ennis-shot-frequency.png" target="_blank" rel="noopener">
         <img class="visual-thumb" src="visuals/dominique-ennis-shot-frequency.png" alt="Dominique Ennis shot frequency heatmap">
         <h3>Dominique Ennis — Shot Frequency</h3>
@@ -286,6 +284,14 @@
         <h3>Rice — After Baseline OOB</h3>
         <p class="desc">Shooting off baseline out-of-bounds plays: 23/52 FG (44.2%).</p>
       </a>
+    </div>
+  </section>
+  <section id="visuals">
+    <h2>Visuals</h2>
+    <div class="grid">
+      <!-- TODO: to add another visual, duplicate one of these <a class="card">
+           blocks, upload the new image into the visuals/ folder, and swap BOTH
+           "visuals/..." paths (img src and href) plus the title/description. -->
       <a class="card" href="visuals/umpire-vs-flightscope.jpg" target="_blank" rel="noopener">
         <img class="visual-thumb" src="visuals/umpire-vs-flightscope.jpg" alt="Umpire calls vs FlightScope zone locations scatter plot">
         <h3>Umpire Calls vs. FlightScope</h3>
