@@ -44,6 +44,25 @@
   .wrap { max-width: 880px; margin: 0 auto; padding: 0 1.4rem; }
   /* Hero */
   .hero { padding: 4.2rem 0 2.4rem 0; }
+  .hero-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .hero-text { min-width: 0; }
+  .hero-photo {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid var(--rule);
+    box-shadow: 0 4px 14px var(--shadow);
+  }
+  @media (max-width: 560px) {
+    .hero-photo { width: 76px; height: 76px; }
+  }
   .hero .kicker {
     font-size: 0.8rem;
     font-weight: 600;
@@ -207,15 +226,20 @@
 <body>
 <div class="wrap">
   <header class="hero">
-    <p class="kicker">Sports Analytics</p>
-    <h1>Noah Gamza</h1>
-    <p class="bio">Baseball &amp; basketball analytics. M.S. Sport Business (Analytics) at Temple University. Analytical projects my own. Built as actual projects for respective roles or out of curiousity. </p>
-    <div class="contact-row">
-      <a class="btn primary" href="mailto:noahsgamza@gmail.com">Email</a>
-      <a class="btn" href="https://www.linkedin.com/in/noah-gamza/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/NoahGamza" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://substack.com/@noah551862" target="_blank" rel="noopener">Substack</a>
-      <a class="btn" href="assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <div class="hero-top">
+      <div class="hero-text">
+        <p class="kicker">Sports Analytics</p>
+        <h1>Noah Gamza</h1>
+        <p class="bio">Baseball &amp; basketball analytics. M.S. Sport Business (Analytics) at Temple University. Analytical projects my own. Built as actual projects for respective roles or out of curiousity. </p>
+        <div class="contact-row">
+          <a class="btn primary" href="mailto:noahsgamza@gmail.com">Email</a>
+          <a class="btn" href="https://www.linkedin.com/in/noah-gamza/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/NoahGamza" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://substack.com/@noah551862" target="_blank" rel="noopener">Substack</a>
+          <a class="btn" href="assets/resume.pdf" target="_blank" rel="noopener">Resume</a>
+        </div>
+      </div>
+      <img class="hero-photo" src="assets/headshot.jpg" alt="Noah Gamza headshot">
     </div>
   </header>
   <nav class="quicknav">
@@ -227,18 +251,12 @@
     <h2>Baseball</h2>
     <div class="grid">
       <div class="card">
-        <div class="top-row">
-          <h3><a href="https://noahgamzashiny.shinyapps.io/flightscope/" target="_blank" rel="noopener">Hamptons League Scout</a></h3>
-          <span class="live-badge">Live</span>
-        </div>
+        <div class="top-row"><h3><a href="https://noahgamzashiny.shinyapps.io/flightscope/" target="_blank" rel="noopener">Hamptons League Scout</a></h3></div>
         <p class="desc">Flight Scope data tracking &amp; analytics for the Hamptons Collegiate Baseball League.</p>
         <a class="go" href="https://noahgamzashiny.shinyapps.io/flightscope/" target="_blank" rel="noopener">Open app →</a>
       </div>
       <div class="card">
-        <div class="top-row">
-          <h3><a href="https://noahgamzashiny.shinyapps.io/mlb_sequencing_app" target="_blank" rel="noopener">SEQAR — Pitch Sequencing</a></h3>
-          <span class="live-badge">Live</span>
-        </div>
+        <div class="top-row"><h3><a href="https://noahgamzashiny.shinyapps.io/mlb_sequencing_app" target="_blank" rel="noopener">SEQAR — Pitch Sequencing</a></h3></div>
         <p class="desc">Statistical investigation built on 2025 Statcast data (729K+ pitches).</p>
         <a class="go" href="https://noahgamzashiny.shinyapps.io/mlb_sequencing_app" target="_blank" rel="noopener">Open app →</a>
       </div>
@@ -253,10 +271,7 @@
     <h2>Basketball</h2>
     <div class="grid">
       <div class="card">
-        <div class="top-row">
-          <h3><a href="wbb_sideline_challenge_calculator.html" target="_blank" rel="noopener">Sideline Challenge Calculator</a></h3>
-          <span class="live-badge">Live</span>
-        </div>
+        <div class="top-row"><h3><a href="wbb_sideline_challenge_calculator.html" target="_blank" rel="noopener">Sideline Challenge Calculator</a></h3></div>
         <p class="desc">In-game tool for WBB staff to gauge whether or not a call is worth appealing? Modeled in game win probability, gauges WP swings, clock, home court, and timeouts left, including the new endgame advance-the-ball rule.</p>
         <a class="go" href="wbb_sideline_challenge_calculator.html" target="_blank" rel="noopener">Open tool →</a>
       </div>
